@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GenPixAI - Free AI Image Generator | No Signup, Unlimited</title>
+<meta name="description" content="GenPixAI is a free AI image generator. Create stunning AI images from text instantly. No signup required. Watch ads to unlock Pro — HD quality, premium models."/>
+<meta name="keywords" content="free ai image generator, text to image, ai art generator, generate ai images free, no signup ai image"/>
+<meta name="robots" content="index, follow"/>
+<meta name="author" content="GenPixAI"/>
+<link rel="canonical" href="https://genpixai.netlify.app/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="GenPixAI - Free AI Image Generator"/>
+<meta property="og:description" content="Generate unlimited AI images free. Watch 3 ads to unlock Pro — HD, premium models, no watermark."/>
+<meta property="og:url" content="https://genpixai.netlify.app/"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="GenPixAI - Free AI Image Generator"/>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"GenPixAI","url":"https://genpixai.netlify.app","description":"Free AI image generator. Create images from text instantly.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5756903700306695" crossorigin="anonymous"></script>
+<style>
+:root{
+  --bg:#05080f;--bg2:#080d1a;--card:#0b1222;--border:#162038;
+  --accent:#4f8ef7;--accent2:#7cb3ff;--cyan:#22d3ee;
+  --gold:#f59e0b;--gold2:#fbbf24;
+  --text:#ddeeff;--muted:#4d6a99;--green:#10b981;
+  --grad:linear-gradient(135deg,#4f8ef7 0%,#6366f1 60%,#8b5cf6 100%);
+  --grad-gold:linear-gradient(135deg,#f59e0b,#fbbf24);
+  --grad-cyan:linear-gradient(135deg,#22d3ee,#4f8ef7);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+
+/* BG */
+body::before{content:'';position:fixed;inset:0;
+  background-image:linear-gradient(rgba(79,142,247,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(79,142,247,0.03) 1px,transparent 1px);
+  background-size:60px 60px;pointer-events:none;z-index:0;}
+body::after{content:'';position:fixed;inset:0;
+  background:radial-gradient(ellipse 800px 500px at 15% -5%,rgba(79,142,247,0.07) 0%,transparent 65%),
+             radial-gradient(ellipse 600px 400px at 85% 105%,rgba(99,102,241,0.06) 0%,transparent 65%);
+  pointer-events:none;z-index:0;}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:14px 36px;
+  background:rgba(5,8,15,0.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-icon{width:36px;height:36px;background:var(--grad);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 4px 16px rgba(79,142,247,0.35);}
+.logo-text{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;letter-spacing:1px;}
+.logo-text .gx{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.logo-text .ai{color:var(--muted);font-size:0.85rem;font-weight:700;margin-left:1px;}
+
+.header-right{display:flex;align-items:center;gap:10px;}
+.pro-pill{display:flex;align-items:center;gap:7px;padding:7px 16px;border-radius:999px;border:1.5px solid var(--border);background:var(--card);font-size:0.78rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all 0.2s;}
+.pro-pill:hover{border-color:var(--accent);}
+.pro-pill.active{background:rgba(245,158,11,0.1);border-color:var(--gold);color:var(--gold);}
+.pro-pill .pdot{width:7px;height:7px;border-radius:50%;background:var(--muted);}
+.pro-pill.active .pdot{background:var(--gold);box-shadow:0 0 8px var(--gold);}
+.menu-btn{background:none;border:1.5px solid var(--border);border-radius:10px;width:38px;height:38px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;transition:all 0.2s;}
+.menu-btn:hover{border-color:var(--accent);background:rgba(79,142,247,0.06);}
+.menu-btn span{display:block;width:16px;height:2px;background:var(--accent2);border-radius:2px;transition:all 0.3s;}
+.menu-btn.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+.menu-btn.open span:nth-child(2){opacity:0;}
+.menu-btn.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+
+/* DROPDOWN */
+.dd-wrap{position:relative;}
+.dropdown{position:absolute;top:calc(100% + 10px);right:0;width:260px;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:none;z-index:999;box-shadow:0 20px 50px rgba(0,0,0,0.6);}
+.dropdown.open{display:block;animation:dropIn 0.2s ease;}
+@keyframes dropIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.dd-head{padding:14px 18px;background:linear-gradient(135deg,rgba(79,142,247,0.1),rgba(99,102,241,0.08));border-bottom:1px solid var(--border);}
+.dd-head .dh-name{font-family:'Syne',sans-serif;font-weight:800;font-size:0.95rem;color:var(--accent2);}
+.dd-head .dh-sub{font-size:0.72rem;color:var(--muted);}
+.dd-section{padding:6px 0;border-bottom:1px solid rgba(22,32,56,0.8);}
+.dd-section:last-child{border-bottom:none;}
+.dd-label{padding:6px 18px 3px;font-size:0.62rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;}
+.dd-item{display:flex;align-items:center;gap:10px;padding:10px 18px;color:var(--text);font-size:0.85rem;font-weight:500;background:none;border:none;cursor:pointer;width:100%;text-align:left;transition:background 0.15s;}
+.dd-item:hover{background:rgba(79,142,247,0.07);color:var(--accent2);}
+.dd-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.85rem;flex-shrink:0;}
+.ic-blue{background:rgba(79,142,247,0.12);}
+.ic-green{background:rgba(16,185,129,0.12);}
+.ic-purple{background:rgba(139,92,246,0.12);}
+.ic-gold{background:rgba(245,158,11,0.12);}
+.ic-red{background:rgba(239,68,68,0.12);}
+.dd-ver{padding:10px 18px;font-size:0.7rem;color:var(--muted);text-align:center;background:rgba(79,142,247,0.03);}
+
+/* MAIN */
+main{position:relative;z-index:5;max-width:860px;margin:0 auto;padding:44px 20px 60px;}
+
+/* HERO */
+.hero{text-align:center;margin-bottom:32px;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;font-size:0.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);background:rgba(79,142,247,0.08);border:1px solid rgba(79,142,247,0.22);padding:5px 14px;border-radius:999px;margin-bottom:18px;}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.2rem,7vw,4.2rem);font-weight:800;line-height:1.05;letter-spacing:1px;margin-bottom:12px;}
+.hero h1 .hl{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero p{color:var(--muted);font-size:0.95rem;max-width:460px;margin:0 auto 16px;line-height:1.65;}
+.hero-tags{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;}
+.htag{display:flex;align-items:center;gap:5px;font-size:0.75rem;color:var(--muted);}
+.htag .hd{width:6px;height:6px;border-radius:50%;}
+.hd-green{background:var(--green);}
+.hd-gold{background:var(--gold);}
+.hd-cyan{background:var(--cyan);}
+
+/* PRO STRIP — compact horizontal */
+.pro-strip{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  background:linear-gradient(135deg,rgba(79,142,247,0.06),rgba(99,102,241,0.05));
+  border:1px solid rgba(79,142,247,0.2);border-radius:16px;padding:16px 20px;
+  margin-bottom:28px;position:relative;overflow:hidden;}
+.pro-strip::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#4f8ef7,#6366f1,#22d3ee);}
+.ps-left{display:flex;align-items:center;gap:12px;}
+.ps-icon{font-size:1.5rem;}
+.ps-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:var(--text);}
+.ps-sub{font-size:0.75rem;color:var(--muted);}
+.ps-right{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.ad-dots{display:flex;gap:5px;}
+.ad-dot{width:24px;height:24px;border-radius:50%;border:2px solid var(--border);background:var(--bg2);display:flex;align-items:center;justify-content:center;transition:all 0.3s;}
+.ad-dot.done{background:var(--green);border-color:var(--green);box-shadow:0 0 8px rgba(16,185,129,0.4);}
+.ad-dot.done::after{content:'✓';color:#fff;font-weight:800;font-size:0.7rem;}
+.ads-count{font-size:0.75rem;color:var(--muted);font-weight:600;}
+.watch-btn{padding:9px 18px;background:var(--grad);border:none;border-radius:10px;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(79,142,247,0.3);transition:all 0.2s;white-space:nowrap;}
+.watch-btn:hover{transform:translateY(-2px);box-shadow:0 7px 20px rgba(79,142,247,0.4);}
+.watch-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+
+/* GEN CARD */
+.gen-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:26px;margin-bottom:26px;position:relative;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.4);}
+.gen-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--grad);}
+.field-label{font-size:0.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;}
+.prompt-wrap{position:relative;margin-bottom:16px;}
+textarea.prompt{width:100%;background:rgba(255,255,255,0.03);border:1.5px solid var(--border);border-radius:13px;padding:14px 16px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.92rem;outline:none;resize:none;min-height:88px;line-height:1.55;transition:border-color 0.3s,box-shadow 0.3s;}
+textarea.prompt:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,142,247,0.12);}
+textarea.prompt::placeholder{color:#1e3050;}
+.char-c{position:absolute;bottom:9px;right:13px;font-size:0.68rem;color:var(--muted);}
+
+/* STYLE CHIPS */
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px;}
+.chip{padding:6px 13px;border-radius:999px;font-size:0.76rem;font-weight:600;border:1.5px solid var(--border);background:rgba(255,255,255,0.02);color:var(--muted);cursor:pointer;transition:all 0.2s;user-select:none;}
+.chip:hover{border-color:rgba(79,142,247,0.4);color:var(--accent2);}
+.chip.sel{border-color:var(--accent);background:rgba(79,142,247,0.1);color:var(--accent2);}
+.chip.pro-c{border-color:rgba(245,158,11,0.2);color:rgba(245,158,11,0.5);}
+.chip.pro-c::after{content:'★';font-size:0.6rem;margin-left:3px;}
+.chip.pro-c.sel{border-color:var(--gold);background:rgba(245,158,11,0.09);color:var(--gold);}
+
+/* OPTIONS */
+.opts{display:flex;gap:12px;margin-bottom:18px;flex-wrap:wrap;}
+.opt-g{flex:1;min-width:130px;}
+.opt-g label{font-size:0.7rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:7px;}
+select.opt-sel{width:100%;background:rgba(255,255,255,0.03);border:1.5px solid var(--border);border-radius:10px;padding:10px 13px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.85rem;outline:none;cursor:pointer;appearance:none;transition:border-color 0.2s;}
+select.opt-sel:focus{border-color:var(--accent);}
+
+/* GENERATE BTN */
+.gen-btn{width:100%;padding:15px;background:var(--grad);border:none;border-radius:13px;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.97rem;font-weight:700;cursor:pointer;box-shadow:0 6px 22px rgba(79,142,247,0.3);transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px;position:relative;overflow:hidden;}
+.gen-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(79,142,247,0.4);}
+.gen-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+.btn-glow{position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.13),transparent);animation:glow 2.5s infinite;}
+@keyframes glow{0%{left:-100%}100%{left:200%}}
+
+/* LOADER */
+.loader{display:none;text-align:center;padding:50px 20px;}
+.loader.on{display:block;}
+.spin-wrap{width:72px;height:72px;margin:0 auto 18px;position:relative;}
+.ring{position:absolute;inset:0;border-radius:50%;border:3px solid transparent;animation:spin 1.4s linear infinite;}
+.r1{border-top-color:#4f8ef7;}
+.r2{border-right-color:#6366f1;animation-duration:1.9s;inset:9px;}
+.r3{border-bottom-color:#22d3ee;animation-duration:2.3s;inset:18px;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader p{color:var(--muted);font-size:0.88rem;}
+.loader .tip{font-size:0.75rem;color:rgba(77,106,153,0.7);margin-top:5px;}
+
+/* ERROR */
+.gen-err{display:none;padding:13px 16px;margin-top:13px;background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.2);border-radius:11px;color:#fca5a5;font-size:0.85rem;}
+.gen-err.on{display:block;}
+
+/* RESULT */
+.result{display:none;margin-top:20px;}
+.result.on{display:block;animation:fadeUp 0.45s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.img-wrap{position:relative;border-radius:15px;overflow:hidden;background:var(--bg2);border:1px solid var(--border);margin-bottom:13px;}
+.img-wrap img{width:100%;display:block;border-radius:15px;}
+.img-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 50%);display:flex;align-items:flex-end;padding:16px;opacity:0;transition:opacity 0.3s;}
+.img-wrap:hover .img-ov{opacity:1;}
+.dl-btn{padding:9px 18px;background:#fff;color:#000;border:none;border-radius:9px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.2s;}
+.dl-btn:hover{background:var(--accent);color:#fff;}
+.wm-tag{position:absolute;top:10px;right:10px;background:rgba(0,0,0,0.55);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.1);border-radius:5px;padding:3px 9px;font-size:0.62rem;color:rgba(255,255,255,0.55);font-weight:700;letter-spacing:1px;}
+.res-meta{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:13px;}
+.rm-tag{font-size:0.7rem;padding:3px 9px;border-radius:5px;background:rgba(255,255,255,0.04);color:var(--muted);border:1px solid var(--border);}
+
+/* FEATURES */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:12px;margin-bottom:36px;}
+.feat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;transition:border-color 0.2s,transform 0.2s;}
+.feat:hover{border-color:rgba(79,142,247,0.3);transform:translateY(-2px);}
+.feat-icon{font-size:1.4rem;margin-bottom:9px;}
+.feat-name{font-weight:700;font-size:0.87rem;margin-bottom:3px;}
+.feat-desc{color:var(--muted);font-size:0.76rem;line-height:1.5;}
+.feat-pro{color:var(--gold);font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;margin-top:6px;}
+
+/* FAQ */
+.faq-section{margin-bottom:40px;}
+.sec-title{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;letter-spacing:1px;margin-bottom:16px;}
+.faq-item{background:var(--card);border:1px solid var(--border);border-radius:13px;margin-bottom:8px;overflow:hidden;}
+.faq-q{width:100%;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:15px 18px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.88rem;font-weight:600;color:var(--text);text-align:left;transition:background 0.15s;}
+.faq-q:hover{background:rgba(79,142,247,0.04);}
+.faq-arr{font-size:0.75rem;color:var(--accent);transition:transform 0.3s;flex-shrink:0;margin-left:10px;}
+.faq-q.open .faq-arr{transform:rotate(180deg);}
+.faq-a{display:none;padding:0 18px 14px;font-size:0.83rem;color:var(--muted);line-height:1.7;}
+.faq-a.open{display:block;animation:fadeUp 0.2s ease;}
+
+/* SECTION AD */
+.sec-ad{text-align:center;padding:18px;background:var(--card);border:1px solid var(--border);border-radius:15px;margin-bottom:36px;}
+.ad-lbl{font-size:0.52rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:5px;}
+
+/* AD MODAL */
+.modal-ov{position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.82);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;padding:20px;}
+.modal-ov.open{display:flex;animation:fadeUp 0.25s ease;}
+.modal-box{background:var(--card);border:1px solid var(--border);border-radius:22px;max-width:440px;width:100%;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,0.6);}
+.modal-top{background:var(--grad);padding:22px 26px 18px;text-align:center;color:#fff;}
+.modal-top .mi{font-size:2rem;margin-bottom:7px;}
+.modal-top h2{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:1.5px;margin-bottom:4px;}
+.modal-top p{font-size:0.82rem;opacity:0.8;}
+.modal-body{padding:22px 26px;}
+.m-ad-box{background:rgba(255,255,255,0.02);border:1.5px dashed var(--border);border-radius:13px;padding:18px;text-align:center;margin-bottom:16px;min-height:105px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;}
+.m-prog{margin-bottom:16px;}
+.prog-bar{width:100%;height:5px;background:var(--bg2);border-radius:999px;overflow:hidden;margin-bottom:7px;}
+.prog-fill{height:100%;background:var(--grad);border-radius:999px;transition:width 1s linear;width:0%;}
+.prog-txt{font-size:0.78rem;color:var(--muted);text-align:center;}
+.prog-txt strong{color:var(--accent2);}
+.m-claim-btn{width:100%;padding:13px;border:none;border-radius:11px;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.92rem;font-weight:700;cursor:pointer;background:var(--grad);color:#fff;box-shadow:0 4px 14px rgba(79,142,247,0.25);transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:7px;}
+.m-claim-btn:disabled{background:var(--bg2);color:var(--muted);box-shadow:none;cursor:not-allowed;}
+.m-claim-btn:not(:disabled):hover{transform:translateY(-2px);}
+.m-cancel{width:100%;padding:9px;background:none;border:none;color:var(--muted);font-size:0.8rem;cursor:pointer;margin-top:6px;transition:color 0.2s;}
+.m-cancel:hover{color:var(--text);}
+
+/* PAGE MODAL */
+.page-ov{position:fixed;inset:0;z-index:9100;background:rgba(0,0,0,0.82);backdrop-filter:blur(12px);display:none;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;}
+.page-ov.open{display:flex;animation:fadeUp 0.25s ease;}
+.page-box{background:var(--card);border:1px solid var(--border);border-radius:20px;max-width:580px;width:100%;margin:auto;padding:34px 30px;position:relative;box-shadow:0 24px 60px rgba(0,0,0,0.5);}
+.page-close{position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.05);border:none;width:32px;height:32px;border-radius:50%;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:background 0.2s;}
+.page-close:hover{background:rgba(255,255,255,0.1);}
+.page-box h2{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:var(--accent2);margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--border);}
+.page-box h3{font-size:0.95rem;font-weight:700;color:var(--text);margin:16px 0 5px;}
+.page-box p{font-size:0.84rem;color:var(--muted);line-height:1.7;margin-bottom:9px;}
+.page-box ul{padding-left:16px;}
+.page-box ul li{font-size:0.84rem;color:var(--muted);line-height:1.7;margin-bottom:3px;}
+.page-box a{color:var(--accent2);}
+
+/* TOAST */
+#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--card);border:1.5px solid var(--accent);color:var(--accent2);padding:11px 22px;border-radius:11px;font-size:0.85rem;z-index:9999;display:none;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,0.4);}
+
+/* FOOTER */
+footer{position:relative;z-index:5;text-align:center;padding:26px 20px;border-top:1px solid var(--border);color:var(--muted);font-size:0.76rem;background:rgba(5,8,15,0.7);}
+footer a{color:var(--muted);text-decoration:none;transition:color 0.2s;}
+footer a:hover{color:var(--accent2);}
+
+@media(max-width:600px){
+  header{padding:12px 16px;}
+  main{padding:26px 14px 48px;}
+  .opts{flex-direction:column;}
+  .gen-card{padding:18px 14px;}
+  .pro-strip{flex-direction:column;align-items:flex-start;}
+  .logo-text .ai{display:none;}
+}
+</style>
+</head>
+<body>
+<div id="toast"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-icon">✦</div>
+    <div class="logo-text"><span class="gx">GenPix</span><span class="ai">AI</span></div>
+  </div>
+  <div class="header-right">
+    <div class="pro-pill" id="proPill" onclick="showProInfo()">
+      <div class="pdot"></div>
+      <span id="pillLabel">Free Plan</span>
+    </div>
+    <div class="dd-wrap">
+      <button class="menu-btn" id="menuBtn" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+      <div class="dropdown" id="dropdown">
+        <div class="dd-head">
+          <div class="dh-name">GenPixAI</div>
+          <div class="dh-sub">Free AI Image Generator</div>
+        </div>
+        <div class="dd-section">
+          <div class="dd-label">Pages</div>
+          <button class="dd-item" onclick="openPage('about')"><span class="dd-icon ic-blue">ℹ️</span>About GenPixAI</button>
+          <button class="dd-item" onclick="openPage('howto')"><span class="dd-icon ic-green">📖</span>How to Use</button>
+        </div>
+        <div class="dd-section">
+          <div class="dd-label">Legal</div>
+          <button class="dd-item" onclick="openPage('privacy')"><span class="dd-icon ic-purple">🔒</span>Privacy Policy</button>
+          <button class="dd-item" onclick="openPage('terms')"><span class="dd-icon ic-blue">📄</span>Terms of Service</button>
+          <button class="dd-item" onclick="openPage('dmca')"><span class="dd-icon ic-red">⚖️</span>DMCA Policy</button>
+          <button class="dd-item" onclick="openPage('contact')"><span class="dd-icon ic-gold">📧</span>Contact Us</button>
+        </div>
+        <div class="dd-ver">v1.0.0 &nbsp;·&nbsp; © 2025 GenPixAI</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">✦ AI Powered &nbsp;·&nbsp; 100% Free &nbsp;·&nbsp; No Signup</div>
+    <h1>Generate <span class="hl">AI Images</span><br>Instantly & Free</h1>
+    <p>Type any idea — get stunning AI-generated images in seconds. Unlimited generations, no account needed.</p>
+    <div class="hero-tags">
+      <div class="htag"><div class="hd hd-green"></div> Unlimited Free</div>
+      <div class="htag"><div class="hd hd-gold"></div> Pro via Ads</div>
+      <div class="htag"><div class="hd hd-cyan"></div> Instant Results</div>
+    </div>
+  </div>
+
+  <!-- PRO STRIP -->
+  <div class="pro-strip" id="proStrip">
+    <div class="ps-left">
+      <div class="ps-icon">⭐</div>
+      <div>
+        <div class="ps-title">Unlock Pro — Watch 3 Ads</div>
+        <div class="ps-sub">HD quality · Premium models · No watermark · 24 hours free</div>
+      </div>
+    </div>
+    <div class="ps-right">
+      <div class="ad-dots">
+        <div class="ad-dot" id="dot1"></div>
+        <div class="ad-dot" id="dot2"></div>
+        <div class="ad-dot" id="dot3"></div>
+      </div>
+      <span class="ads-count" id="adsCount">0/3 ads</span>
+      <button class="watch-btn" id="watchBtn" onclick="startAd()">📺 Watch Ad</button>
+    </div>
+  </div>
+
+  <!-- GENERATOR -->
+  <div class="gen-card">
+    <div class="field-label">✏️ Describe your image</div>
+    <div class="prompt-wrap">
+      <textarea class="prompt" id="promptInp" maxlength="500" oninput="updateChar()"
+        placeholder="A futuristic city skyline at night with neon lights reflecting on wet streets, cinematic, ultra detailed…"></textarea>
+      <span class="char-c" id="charC">0/500</span>
+    </div>
+
+    <div class="field-label">🎨 Style</div>
+    <div class="chips" id="chips">
+      <div class="chip sel" onclick="pickStyle(this,'')">None</div>
+      <div class="chip" onclick="pickStyle(this,'photorealistic, professional photography, 8K')">📷 Photo</div>
+      <div class="chip" onclick="pickStyle(this,'anime style, vibrant, detailed illustration')">🎌 Anime</div>
+      <div class="chip" onclick="pickStyle(this,'digital art, concept art, stunning visuals')">🖌️ Digital Art</div>
+      <div class="chip" onclick="pickStyle(this,'oil painting, classical art, fine art masterpiece')">🎭 Oil Paint</div>
+      <div class="chip pro-c" data-pro="1" onclick="pickStyle(this,'cinematic, movie still, dramatic lighting, film')">🎬 Cinematic</div>
+      <div class="chip pro-c" data-pro="1" onclick="pickStyle(this,'3D render, octane render, hyper realistic, volumetric light')">💎 3D Render</div>
+      <div class="chip pro-c" data-pro="1" onclick="pickStyle(this,'watercolor painting, soft edges, artistic, pastel')">🌊 Watercolor</div>
+      <div class="chip pro-c" data-pro="1" onclick="pickStyle(this,'pixel art, retro game style, 16-bit')">🕹️ Pixel Art</div>
+    </div>
+
+    <div class="opts">
+      <div class="opt-g">
+        <label>📐 Size</label>
+        <select class="opt-sel" id="sizeS">
+          <option value="512x512">512 x 512 — Free</option>
+          <option value="768x768">768 x 768 — Free</option>
+          <option value="1024x1024" id="s1024">1024 x 1024 ★ Pro</option>
+          <option value="1024x576" id="s169">1024 x 576 ★ Pro</option>
+        </select>
+      </div>
+      <div class="opt-g">
+        <label>🤖 Model</label>
+        <select class="opt-sel" id="modelS">
+          <option value="flux">Flux — Fast (Free)</option>
+          <option value="turbo" id="mTurbo">Turbo ★ Pro</option>
+          <option value="flux-realism" id="mReal">Flux Realism ★ Pro</option>
+          <option value="flux-anime" id="mAnime">Flux Anime ★ Pro</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="gen-btn" id="genBtn" onclick="generate()">
+      <div class="btn-glow"></div>
+      ✦ Generate Image
+    </button>
+
+    <div class="loader" id="loader">
+      <div class="spin-wrap">
+        <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
+      </div>
+      <p>Creating your masterpiece…</p>
+      <p class="tip" id="tipTxt">Painting pixels with AI magic ✨</p>
+    </div>
+    <div class="gen-err" id="genErr">⚠️ <span id="errTxt">Something went wrong. Please try again.</span></div>
+
+    <div class="result" id="result">
+      <div class="img-wrap" id="imgWrap">
+        <img id="genImg" src="" alt="AI Generated Image"/>
+        <div class="wm-tag" id="wmTag">GenPixAI</div>
+        <div class="img-ov"><button class="dl-btn" onclick="dlImg()">⬇ Download</button></div>
+      </div>
+      <div class="res-meta" id="resMeta"></div>
+
+      <!-- INLINE AD -->
+      <div class="sec-ad" style="margin-bottom:14px;">
+        <div class="ad-lbl">Advertisement</div>
+        <ins class="adsbygoogle" style="display:block"
+          data-ad-client="ca-pub-5756903700306695"
+          data-ad-slot="2222222222"
+          data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+      </div>
+
+      <button class="gen-btn" onclick="generate()"><div class="btn-glow"></div>🔄 Generate Another</button>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="sec-title">Why GenPixAI?</div>
+  <div class="feat-grid" style="margin-bottom:36px;">
+    <div class="feat"><div class="feat-icon">♾️</div><div class="feat-name">Unlimited Free</div><div class="feat-desc">Generate as many images as you want. No daily limit, no signup, completely free.</div></div>
+    <div class="feat"><div class="feat-icon">⚡</div><div class="feat-name">Lightning Fast</div><div class="feat-desc">Images ready in 5–15 seconds powered by Flux AI — one of the fastest models.</div></div>
+    <div class="feat"><div class="feat-icon">🎨</div><div class="feat-name">Multiple Styles</div><div class="feat-desc">Photo, Anime, Digital Art, Oil Painting. Pro unlocks Cinematic, 3D & more.</div><div class="feat-pro">★ Pro: 4 extra styles</div></div>
+    <div class="feat"><div class="feat-icon">🖼️</div><div class="feat-name">HD Quality</div><div class="feat-desc">Free up to 768px. Watch 3 short ads to unlock 1024px HD for 24 hours.</div><div class="feat-pro">★ Pro: 1024px HD</div></div>
+    <div class="feat"><div class="feat-icon">🤖</div><div class="feat-name">Premium Models</div><div class="feat-desc">Free: Flux Fast. Pro unlocks Turbo, Realism & Anime specialized models.</div><div class="feat-pro">★ Pro: 4 AI models</div></div>
+    <div class="feat"><div class="feat-icon">⬇️</div><div class="feat-name">Free Download</div><div class="feat-desc">Download every image you generate. No watermark on Pro plan.</div><div class="feat-pro">★ Pro: No watermark</div></div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-section">
+    <div class="sec-title">Frequently Asked Questions</div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Is GenPixAI completely free? <span class="faq-arr">▼</span></button>
+      <div class="faq-a">Yes! GenPixAI is 100% free with unlimited image generation. You don't need to sign up or pay anything. Watching 3 short ads unlocks Pro features (HD quality, premium models, no watermark) for 24 hours at no cost.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How do I unlock Pro features? <span class="faq-arr">▼</span></button>
+      <div class="faq-a">Simply click "Watch Ad" in the Pro strip above the generator. Watch 3 short ads (10 seconds each) and Pro features unlock automatically for 24 hours — completely free!</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What AI model does GenPixAI use? <span class="faq-arr">▼</span></button>
+      <div class="faq-a">GenPixAI uses Flux AI via the Pollinations AI network — one of the most advanced open-source image generation models. Pro users get access to Flux Turbo, Flux Realism, and Flux Anime specialized models.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Can I download and use the generated images? <span class="faq-arr">▼</span></button>
+      <div class="faq-a">Yes! All images you generate can be downloaded for free. Free plan images have a small watermark. Pro plan images are watermark-free. Please note that AI-generated images should be used responsibly and in accordance with our Terms of Service.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How do I write a good prompt? <span class="faq-arr">▼</span></button>
+      <div class="faq-a">Be specific and descriptive! Include the subject, style, mood, lighting, and details you want. For example: "A Japanese temple at sunset, cherry blossoms falling, golden hour light, cinematic, 8K" will give much better results than just "temple".</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Are there any restrictions on what I can generate? <span class="faq-arr">▼</span></button>
+      <div class="faq-a">Yes. GenPixAI must not be used to generate NSFW, violent, hateful, or illegal content. Content involving real people without consent is also prohibited. Please review our Terms of Service for the full list of restrictions.</div>
+    </div>
+  </div>
+
+  <!-- SECTION AD -->
+  <div class="sec-ad">
+    <div class="ad-lbl">Advertisement</div>
+    <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px"
+      data-ad-client="ca-pub-5756903700306695" data-ad-slot="3333333333"></ins>
+    <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+  </div>
+
+</main>
+
+<footer>
+  <p style="margin-bottom:7px;">
+    <a href="#" onclick="openPage('privacy');return false;">Privacy Policy</a> &nbsp;·&nbsp;
+    <a href="#" onclick="openPage('terms');return false;">Terms of Service</a> &nbsp;·&nbsp;
+    <a href="#" onclick="openPage('dmca');return false;">DMCA</a> &nbsp;·&nbsp;
+    <a href="#" onclick="openPage('contact');return false;">Contact</a> &nbsp;·&nbsp;
+    <a href="#" onclick="openPage('about');return false;">About</a>
+  </p>
+  <p style="margin-bottom:4px;">GenPixAI — Free AI Image Generator. Create stunning AI art from text instantly.</p>
+  <p>© 2025 GenPixAI. Powered by Pollinations AI. Not affiliated with any AI company.</p>
+</footer>
+
+<!-- AD MODAL -->
+<div class="modal-ov" id="adModal">
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="mi">📺</div>
+      <h2>Watch Ad</h2>
+      <p id="adSubTxt">Ad 1 of 3 — Earn Pro access free</p>
+    </div>
+    <div class="modal-body">
+      <div class="m-ad-box">
+        <div class="ad-lbl">Advertisement</div>
+        <ins class="adsbygoogle" style="display:inline-block;width:300px;height:100px;max-width:100%"
+          data-ad-client="ca-pub-5756903700306695" data-ad-slot="4444444444"></ins>
+        <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+        <div style="font-size:0.75rem;color:var(--muted);margin-top:5px;">Pro credit unlocks after ad completes</div>
+      </div>
+      <div class="m-prog">
+        <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+        <div class="prog-txt">Please wait — <strong id="countSec">10</strong>s remaining</div>
+      </div>
+      <button class="m-claim-btn" id="claimBtn" disabled onclick="claimAd()">🔒 Please Wait…</button>
+      <button class="m-cancel" onclick="closeAd()">✕ Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE MODAL -->
+<div class="page-ov" id="pageModal">
+  <div class="page-box">
+    <button class="page-close" onclick="closePage()">✕</button>
+    <div id="pageContent"></div>
+  </div>
+</div>
+
+<script>
+/* ===================== STATE ===================== */
+let curStyle = '';
+let curImgUrl = '';
+let adsWatched = 0;
+let isPro = false;
+let adTimer = null;
+const tips = ['Painting pixels with AI magic ✨','Asking AI to dream for you… 🌙','Mixing colors in the digital canvas 🎨','Teaching neurons to be artists 🧠','Adding final touches… ✍️'];
+
+/* ===================== STORAGE ===================== */
+const S = {
+  get: k => { try { return localStorage.getItem(k); } catch(e) { return null; } },
+  set: (k,v) => { try { localStorage.setItem(k,v); } catch(e) {} },
+  del: k => { try { localStorage.removeItem(k); } catch(e) {} }
+};
+
+/* ===================== INIT ===================== */
+function init() {
+  try {
+    adsWatched = parseInt(S.get('gpx_ads') || '0') || 0;
+    const exp = parseInt(S.get('gpx_pro') || '0');
+    updateDots();
+    if (exp && Date.now() < exp) { activatePro(false); }
+    else { S.del('gpx_pro'); updateProUI(false); }
+  } catch(e) { updateProUI(false); }
+}
+
+/* ===================== PRO ===================== */
+function activatePro(save = true) {
+  isPro = true;
+  if (save) {
+    S.set('gpx_pro', (Date.now() + 86400000).toString());
+    adsWatched = 0; S.set('gpx_ads','0');
+  }
+  updateProUI(true);
+  document.getElementById('proStrip').style.display = 'none';
+  toast('🎉 Pro Unlocked for 24 hours!');
+}
+
+function updateProUI(active) {
+  const pill = document.getElementById('proPill');
+  const lbl = document.getElementById('pillLabel');
+  const wm = document.getElementById('wmTag');
+  if (active) {
+    pill.classList.add('active');
+    const h = Math.ceil((parseInt(S.get('gpx_pro'))-Date.now())/3600000);
+    lbl.textContent = `⭐ Pro · ${h}h left`;
+    if(wm) wm.style.display = 'none';
+    ['s1024','s169','mTurbo','mReal','mAnime'].forEach(id => { const e=document.getElementById(id); if(e) e.disabled=false; });
+    document.querySelectorAll('.chip.pro-c').forEach(c => { c.style.opacity='1'; });
+  } else {
+    pill.classList.remove('active'); lbl.textContent = 'Free Plan';
+    if(wm) wm.style.display = 'block';
+    ['s1024','s169','mTurbo','mReal','mAnime'].forEach(id => { const e=document.getElementById(id); if(e) e.disabled=true; });
+    document.querySelectorAll('.chip.pro-c').forEach(c => { c.style.opacity='0.4'; });
+  }
+}
+
+function showProInfo() {
+  if (isPro) { const h=Math.ceil((parseInt(S.get('gpx_pro'))-Date.now())/3600000); toast(`⭐ Pro active — ${h} hours left`); }
+  else { document.getElementById('proStrip').scrollIntoView({behavior:'smooth'}); }
+}
+
+/* ===================== AD DOTS ===================== */
+function updateDots() {
+  for (let i=1;i<=3;i++) {
+    const d=document.getElementById(`dot${i}`);
+    if(d) { adsWatched>=i ? d.classList.add('done') : d.classList.remove('done'); }
+  }
+  const c=document.getElementById('adsCount');
+  if(c) c.textContent = `${adsWatched}/3 ads`;
+  const btn=document.getElementById('watchBtn');
+  if(!btn) return;
+  if (adsWatched>=3) { btn.textContent='🎉 Unlock Pro!'; btn.onclick=()=>activatePro(true); }
+  else { btn.textContent=`📺 Watch Ad ${adsWatched+1}`; btn.onclick=startAd; }
+}
+
+/* ===================== AD FLOW ===================== */
+function startAd() {
+  if (isPro) return;
+  document.getElementById('adSubTxt').textContent = `Ad ${adsWatched+1} of 3 — Earn Pro access free`;
+  document.getElementById('progFill').style.width='0%';
+  const cs=document.getElementById('countSec');
+  cs.textContent='10';
+  document.getElementById('claimBtn').disabled=true;
+  document.getElementById('claimBtn').textContent='🔒 Please Wait…';
+  document.getElementById('adModal').classList.add('open');
+  try{(adsbygoogle=window.adsbygoogle||[]).push({});}catch(e){}
+  let s=10;
+  adTimer=setInterval(()=>{
+    s--;
+    cs.textContent=s;
+    document.getElementById('progFill').style.width=`${((10-s)/10)*100}%`;
+    if(s<=0){
+      clearInterval(adTimer);
+      document.getElementById('claimBtn').disabled=false;
+      document.getElementById('claimBtn').textContent='✅ Claim Pro Credit';
+      document.querySelector('.prog-txt').innerHTML='<strong style="color:var(--green)">✓ Ad complete! Claim your credit.</strong>';
+    }
+  },1000);
+}
+
+function claimAd() {
+  closeAd();
+  adsWatched++;
+  S.set('gpx_ads', adsWatched.toString());
+  updateDots();
+  if (adsWatched>=3) { setTimeout(()=>activatePro(true),400); }
+  else { toast(`✅ Ad ${adsWatched}/3 done! ${3-adsWatched} more to go.`); }
+}
+
+function closeAd() { clearInterval(adTimer); document.getElementById('adModal').classList.remove('open'); }
+
+/* ===================== GENERATE ===================== */
+function pickStyle(el, style) {
+  if (el.dataset.pro==='1' && !isPro) { toast('⭐ Unlock Pro to use this style!'); return; }
+  document.querySelectorAll('#chips .chip').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel'); curStyle=style;
+}
+
+function updateChar() {
+  const v=document.getElementById('promptInp').value.length;
+  document.getElementById('charC').textContent=`${v}/500`;
+}
+
+async function generate() {
+  const prompt=document.getElementById('promptInp').value.trim();
+  if(!prompt){toast('⚠️ Please enter a prompt!');return;}
+  const size=document.getElementById('sizeS').value;
+  const model=document.getElementById('modelS').value;
+  if((size==='1024x1024'||size==='1024x576'||model!=='flux') && !isPro){toast('⭐ Unlock Pro for HD & premium models!');return;}
+  const btn=document.getElementById('genBtn');
+  btn.disabled=true;
+  document.getElementById('loader').classList.add('on');
+  document.getElementById('result').classList.remove('on');
+  document.getElementById('genErr').classList.remove('on');
+  let ti=0;
+  const tipEl=document.getElementById('tipTxt');
+  const tipInt=setInterval(()=>{ti=(ti+1)%tips.length;tipEl.textContent=tips[ti];},3000);
+  try {
+    const full=curStyle?`${prompt}, ${curStyle}`:prompt;
+    const [w,h]=size.split('x').map(Number);
+    const seed=Math.floor(Math.random()*99999);
+    const url=`https://image.pollinations.ai/prompt/${encodeURIComponent(full)}?width=${w}&height=${h}&model=${model}&seed=${seed}&nologo=${isPro?'true':'false'}&enhance=true`;
+    await new Promise((res,rej)=>{
+      const img=new Image();
+      img.onload=res;
+      img.onerror=()=>rej(new Error('Generation failed. Check your prompt and try again!'));
+      img.src=url;
+      setTimeout(()=>rej(new Error('Timeout — server busy. Please try again!')),65000);
+    });
+    curImgUrl=url;
+    document.getElementById('genImg').src=url;
+    document.getElementById('wmTag').style.display=isPro?'none':'block';
+    const meta=document.getElementById('resMeta');
+    meta.innerHTML=`<span class="rm-tag">📐 ${size}</span><span class="rm-tag">🤖 ${model}</span><span class="rm-tag">🎨 ${curStyle||'No style'}</span>${isPro?'<span class="rm-tag" style="color:var(--gold)">⭐ Pro</span>':''}`;
+    document.getElementById('loader').classList.remove('on');
+    document.getElementById('result').classList.add('on');
+  } catch(err) {
+    document.getElementById('errTxt').textContent=err.message;
+    document.getElementById('genErr').classList.add('on');
+    document.getElementById('loader').classList.remove('on');
+  } finally { clearInterval(tipInt); btn.disabled=false; }
+}
+
+function dlImg() {
+  if(!curImgUrl)return;
+  const a=document.createElement('a');
+  a.href=curImgUrl; a.download=`genpixai_${Date.now()}.jpg`; a.target='_blank'; a.click();
+  toast('⬇ Downloading your image…');
+}
+
+/* ===================== MENU ===================== */
+function toggleMenu() {
+  document.getElementById('menuBtn').classList.toggle('open');
+  document.getElementById('dropdown').classList.toggle('open');
+}
+document.addEventListener('click', e=>{
+  if(!e.target.closest('.dd-wrap')) {
+    document.getElementById('menuBtn').classList.remove('open');
+    document.getElementById('dropdown').classList.remove('open');
+  }
+});
+
+/* ===================== FAQ ===================== */
+function toggleFaq(btn) {
+  const a=btn.nextElementSibling;
+  const wasOpen=a.classList.contains('open');
+  document.querySelectorAll('.faq-a.open').forEach(x=>x.classList.remove('open'));
+  document.querySelectorAll('.faq-q.open').forEach(x=>x.classList.remove('open'));
+  if(!wasOpen){a.classList.add('open');btn.classList.add('open');}
+}
+
+/* ===================== PAGES ===================== */
+const pages = {
+  about:{title:'About GenPixAI',html:`
+    <h3>What is GenPixAI?</h3>
+    <p>GenPixAI is a free, browser-based AI image generator that lets you create stunning images from text descriptions — instantly, without signup, and without installing any software.</p>
+    <h3>How It Works</h3>
+    <p>We use the Pollinations AI network which provides access to Flux AI — one of the most advanced open-source image generation models. No video data or personal info is stored on our servers.</p>
+    <h3>Free vs Pro</h3>
+    <p><strong>Free:</strong> Unlimited images, up to 768px, Flux Fast model, basic styles, watermarked downloads.</p>
+    <p><strong>Pro (watch 3 ads):</strong> 1024px HD quality, 4 AI models, all styles, no watermark — valid for 24 hours.</p>
+    <h3>Why It's Free</h3>
+    <p>GenPixAI is funded by advertising. Watching ads for Pro access directly supports our operating costs. Thank you!</p>
+    <h3>Version</h3><p>Current version: <strong>1.0.0</strong></p>`},
+  howto:{title:'How to Use GenPixAI',html:`
+    <h3>Step 1 — Write a Prompt</h3>
+    <p>In the text box, describe the image you want. Be specific! Include subject, style, mood, lighting, and details.</p>
+    <h3>Step 2 — Choose a Style</h3>
+    <p>Pick a style preset like Photo, Anime, or Digital Art. Pro users get access to Cinematic, 3D Render, Watercolor, and Pixel Art styles.</p>
+    <h3>Step 3 — Select Size & Model</h3>
+    <p>Free users can use 512px and 768px with the Flux Fast model. Pro unlocks 1024px HD and premium models.</p>
+    <h3>Step 4 — Generate</h3>
+    <p>Click the "Generate Image" button. Results are ready in 5–15 seconds.</p>
+    <h3>Step 5 — Download</h3>
+    <p>Hover over the image and click "Download" to save it to your device.</p>
+    <h3>Tips for Better Results</h3>
+    <ul>
+      <li>Be specific and descriptive in your prompt</li>
+      <li>Add style keywords like "4K", "ultra detailed", "cinematic lighting"</li>
+      <li>Try different styles for the same prompt</li>
+      <li>If results aren't perfect, click Generate Another for a new seed</li>
+    </ul>`},
+  privacy:{title:'Privacy Policy',html:`
+    <p>Last updated: April 1, 2025</p>
+    <h3>1. Information We Collect</h3>
+    <p>GenPixAI does not require account registration and does not store any personal information. We do not log, store, or share the text prompts you enter.</p>
+    <h3>2. Image Generation</h3>
+    <p>Prompts you enter are sent directly to the Pollinations AI API to generate images. We do not store your prompts or the images generated.</p>
+    <h3>3. Local Storage</h3>
+    <p>We use your browser's local storage only to save your Pro unlock status (ad watch count and expiry time). No data is sent to our servers.</p>
+    <h3>4. Cookies & Advertising</h3>
+    <p>We use Google AdSense (Publisher ID: ca-pub-5756903700306695) to display advertisements. Google may use cookies to serve personalized ads based on your browsing activity. You can opt out via <a href="https://adssettings.google.com" target="_blank">Google Ad Settings</a>.</p>
+    <h3>5. Third-Party Services</h3>
+    <p>We use Pollinations AI API for image generation. Their privacy policy applies to prompt data sent to their servers. We use Google AdSense for advertising. Google's privacy policy governs ad data collection.</p>
+    <h3>6. Data Security</h3>
+    <p>We do not collect sensitive personal data. No passwords, payment information, or private content is processed by our platform.</p>
+    <h3>7. Children's Privacy</h3>
+    <p>GenPixAI is not directed at children under the age of 13. We do not knowingly collect data from minors.</p>
+    <h3>8. Changes to This Policy</h3>
+    <p>We may update this policy periodically. Continued use of the service implies acceptance of updated terms.</p>
+    <h3>9. Contact</h3>
+    <p>For privacy concerns: <strong>privacy@genpixai.com</strong></p>`},
+  terms:{title:'Terms of Service',html:`
+    <p>By using GenPixAI, you agree to the following terms.</p>
+    <h3>1. Permitted Use</h3>
+    <p>GenPixAI is provided for personal, creative, and non-commercial use. You may generate images for personal projects, art, and creative exploration.</p>
+    <h3>2. Prohibited Content</h3>
+    <ul>
+      <li>NSFW, sexually explicit, or adult content</li>
+      <li>Violence, gore, or harmful content</li>
+      <li>Content targeting or exploiting minors</li>
+      <li>Hate speech or content promoting discrimination</li>
+      <li>Deepfakes or realistic images of real people without consent</li>
+      <li>Images intended to deceive or spread misinformation</li>
+      <li>Any illegal content under applicable laws</li>
+    </ul>
+    <h3>3. Intellectual Property</h3>
+    <p>Images generated using GenPixAI are created via the Pollinations AI network. You are responsible for ensuring your use of generated images complies with applicable copyright and intellectual property laws.</p>
+    <h3>4. Pro Access via Ads</h3>
+    <p>Pro features are unlocked by watching 3 advertisements. Pro access is valid for 24 hours and is stored locally in your browser. We reserve the right to modify Pro features at any time.</p>
+    <h3>5. Advertising</h3>
+    <p>GenPixAI is free and funded by Google AdSense advertising. By using the service, you consent to the display of advertisements.</p>
+    <h3>6. Disclaimer of Warranties</h3>
+    <p>The service is provided "as is" without warranties. We are not responsible for the content of generated images or their use by you.</p>
+    <h3>7. Limitation of Liability</h3>
+    <p>GenPixAI shall not be liable for any damages arising from use or inability to use the service, including generated content.</p>
+    <h3>8. Changes to Terms</h3>
+    <p>We may update these terms at any time. Continued use constitutes acceptance of updated terms.</p>`},
+  dmca:{title:'DMCA Policy',html:`
+    <p>GenPixAI respects intellectual property rights and complies with the Digital Millennium Copyright Act (DMCA).</p>
+    <h3>Our Position</h3>
+    <p>GenPixAI is an AI image generation tool. We do not host, store, or redistribute user-generated images. All images are generated on-demand via the Pollinations AI network and are not stored on our servers.</p>
+    <h3>Copyright Concerns</h3>
+    <p>If you believe content generated through our service infringes your copyright, please contact us with:</p>
+    <ul>
+      <li>Your full name and contact information</li>
+      <li>Description of the copyrighted work claimed to be infringed</li>
+      <li>A statement of good faith belief that the use is unauthorized</li>
+      <li>Your electronic or physical signature</li>
+    </ul>
+    <h3>Send DMCA Notices To</h3>
+    <p><strong>Email:</strong> dmca@genpixai.com</p>
+    <p>We will respond to valid DMCA notices within 5–10 business days.</p>
+    <h3>Repeat Infringer Policy</h3>
+    <p>We reserve the right to block access for users who repeatedly violate intellectual property rights or our Terms of Service.</p>`},
+  contact:{title:'Contact Us',html:`
+    <h3>Get in Touch</h3>
+    <p>We'd love to hear from you! Reach out to the right team below.</p>
+    <h3>📧 General Support</h3><p><strong>support@genpixai.com</strong></p>
+    <h3>⚖️ DMCA / Copyright</h3><p><strong>dmca@genpixai.com</strong></p>
+    <h3>🔒 Privacy Concerns</h3><p><strong>privacy@genpixai.com</strong></p>
+    <h3>💼 Business / Advertising</h3><p><strong>business@genpixai.com</strong></p>
+    <h3>Response Time</h3>
+    <p>We aim to respond within 1–3 business days. Urgent DMCA matters: within 5 business days.</p>
+    <p style="margin-top:12px;font-size:0.78rem;color:var(--muted);">GenPixAI is an independent service not affiliated with Pollinations AI, Google, or any AI company.</p>`}
+};
+
+function openPage(key) {
+  const p=pages[key]; if(!p) return;
+  document.getElementById('pageContent').innerHTML=`<h2>${p.title}</h2>${p.html}`;
+  document.getElementById('pageModal').classList.add('open');
+  document.getElementById('menuBtn').classList.remove('open');
+  document.getElementById('dropdown').classList.remove('open');
+}
+function closePage(){document.getElementById('pageModal').classList.remove('open');}
+
+/* ===================== TOAST ===================== */
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.style.display='block';
+  clearTimeout(window._tt);
+  window._tt=setTimeout(()=>t.style.display='none',3500);
+}
+
+/* ===================== MODAL CLOSE ===================== */
+document.getElementById('adModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeAd();});
+document.getElementById('pageModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closePage();});
+
+init();
+</script>
+</body>
+</html>
